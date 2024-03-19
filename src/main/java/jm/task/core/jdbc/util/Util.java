@@ -12,11 +12,11 @@ import java.util.Properties;
 
 public class Util {
     // реализуйте настройку соеденения с БД
-    public static SessionFactory sessionFactory ;
+
 
     public static SessionFactory getSessionFactory() {
 
-        if (sessionFactory == null) {
+
             try {
                 Configuration config = new Configuration();
                 Properties settings = new Properties();
@@ -32,12 +32,12 @@ public class Util {
                 config.setProperties(settings);
                 config.addAnnotatedClass(User.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-                sessionFactory = config.buildSessionFactory(serviceRegistry);
+
+                return  config.buildSessionFactory(serviceRegistry);
             } catch (HibernateException e) {
                 throw new RuntimeException(e);
             }
 
-        }
-        return sessionFactory;
+
     }
 }
